@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Météo</string>
-    <string name="title_item_detail">Item Detail</string>
 
     <!-- Action -->
     <string name="action_cancel">Annuler</string>
@@ -8,9 +7,15 @@
     <string name="action_delete_all">Effacer tout</string>
     <string name="action_edit">Editer</string>
     <string name="action_goto">Carte</string>
-    <string name="action_init">Réinitialiser</string>
+    <string name="action_init">Réinitialiser DB</string>
+    <string name="action_mosaic">Mosaïque</string>
     <string name="action_new_place">Nouveau lieu</string>
     <string name="action_save">Sauvegarder</string>
+    <string name="action_refresh">Raffraichir</string>
+
+    <!-- Strings -->
+    <string name="temperature">%1$s°</string>
+    <string name="weather">Météo</string>
 
     <!-- Errors -->
     <string name="error">Error</string>

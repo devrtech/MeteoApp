@@ -27,15 +27,13 @@ public class MeteoDBHelper extends SQLiteOpenHelper {
     private SQLiteDatabase database;
 
     // DB version (incremented when database change)
-    public static final int DATABASE_VERSION = 4;
+    public static final int DATABASE_VERSION = 5;
 
     // Database name
     public static final String DATABASE_NAME = "Places.db";
 
     /**
      * Default constructor
-     *
-     * @param context
      */
     public MeteoDBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -53,7 +51,6 @@ public class MeteoDBHelper extends SQLiteOpenHelper {
         // to simply to discard the data and start over
         db.execSQL(SQL_DELETE_PLACES);
         onCreate(db);
-        fillInitDB();
     }
 
     @Override
@@ -77,14 +74,14 @@ public class MeteoDBHelper extends SQLiteOpenHelper {
         // Instantiate global list
         List<Place> places = new ArrayList<>();
         // Query
-        Cursor cursor = database.query(PlaceEntry.TABLE_NAME, PlaceEntry.ALL_COLUMNS, null, null, null, null, null);
+        Cursor cursor = database.query(PlaceEntry.TABLE_NAME, PlaceEntry.ALL_COLUMNS, null, null, null, null, PlaceEntry.COLUMN_NAME_NAME);
         // First
         cursor.moveToFirst();
         // Iterate
         while (!cursor.isAfterLast()) {
             // Get {@link Place} objetc
             Place place = cursorToPlace(cursor);
-            Log.d(TAG, "place: " + place);
+            //Log.d(TAG, "place: " + place);
             // Adding object
             places.add(place);
             // Move to next
@@ -108,6 +105,19 @@ public class MeteoDBHelper extends SQLiteOpenHelper {
         return place;
     }
 
+    public Place getPlaceFromOWMid(long id) {
+        // Query
+        Cursor cursor = database.query(PlaceEntry.TABLE_NAME, PlaceEntry.ALL_COLUMNS, PlaceEntry.COLUMN_NAME_OWM_ID + "=?",
+                new String[]{Long.toString(id)}, null, null, null);
+        // First
+        cursor.moveToFirst();
+        // Get {@link Place} object
+        Place place = cursorToPlace(cursor);
+        // Closing
+        cursor.close();
+        return place;
+    }
+
     /* *** UPDATE DB *** */
 
     public void insertPlace(Place place) {
@@ -119,6 +129,7 @@ public class MeteoDBHelper extends SQLiteOpenHelper {
             values.put(PlaceEntry.COLUMN_NAME_TYPE, place.getType().getId());
             values.put(PlaceEntry.COLUMN_NAME_LONGITUDE, place.getLongitude());
             values.put(PlaceEntry.COLUMN_NAME_LATITUDE, place.getLatitude());
+            values.put(PlaceEntry.COLUMN_NAME_OWM_ID, place.getOpenWeatherMapId());
             // Insert request
             database.insert(PlaceEntry.TABLE_NAME, null, values);
         }
@@ -150,6 +161,7 @@ public class MeteoDBHelper extends SQLiteOpenHelper {
         place.setName(cursor.getString(1));
         place.setLongitude(cursor.getFloat(3));
         place.setLatitude(cursor.getFloat(4));
+        place.setOpenWeatherMapId(cursor.getLong(5));
         // return place
         return place;
     }
@@ -169,11 +181,11 @@ public class MeteoDBHelper extends SQLiteOpenHelper {
                     PlaceEntry.COLUMN_NAME_NAME + TEXT_TYPE + COMMA_SEP +
                     PlaceEntry.COLUMN_NAME_TYPE + INTEGER_TYPE + COMMA_SEP +
                     PlaceEntry.COLUMN_NAME_LONGITUDE + FLOAT_TYPE + COMMA_SEP +
-                    PlaceEntry.COLUMN_NAME_LATITUDE + FLOAT_TYPE + " )";
+                    PlaceEntry.COLUMN_NAME_LATITUDE + FLOAT_TYPE + COMMA_SEP +
+                    PlaceEntry.COLUMN_NAME_OWM_ID + INTEGER_TYPE + " )";
 
     static final private String SQL_DELETE_PLACES =
             "DROP TABLE IF EXISTS " + PlaceEntry.TABLE_NAME;
-
 
     /**
      * Inner class that defines the table contents
@@ -188,8 +200,9 @@ public class MeteoDBHelper extends SQLiteOpenHelper {
         static final public String COLUMN_NAME_TYPE = "type";
         static final public String COLUMN_NAME_LONGITUDE = "longitude";
         static final public String COLUMN_NAME_LATITUDE = "latitude";
+        static final public String COLUMN_NAME_OWM_ID = "owmid";
         static final private String[] ALL_COLUMNS = {_ID, COLUMN_NAME_NAME,
-                COLUMN_NAME_TYPE, COLUMN_NAME_LONGITUDE, COLUMN_NAME_LATITUDE};
+                COLUMN_NAME_TYPE, COLUMN_NAME_LONGITUDE, COLUMN_NAME_LATITUDE, COLUMN_NAME_OWM_ID};
     }
 
 }

@@ -1,21 +1,42 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_margin="@dimen/activity_margin">
 
-    <ImageView
-        android:id="@+id/meteo_image_meteo"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scaleType="fitCenter"/>
+        android:layout_margin="@dimen/activity_margin"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:context=".ui.fragment.PlaceDetailsFragment">
 
+        <ProgressBar
+            android:id="@+id/meteo_progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="100dp" />
 
-    <TextView
-        android:id="@+id/item_detail"
-        style="?android:attr/textAppearanceLarge"
-        android:padding="16dp"
-        android:textIsSelectable="true"
-        tools:context=".ui.fragment.PlaceDetailsFragment" />
+        <TextView
+            android:id="@+id/meteo_text_temp"
+            style="?android:attr/textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-</LinearLayout>
+        <fr.devrtech.meteoapp.ui.view.SquareImageView
+            android:id="@+id/meteo_image_weather"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:scaleType="fitCenter" />
+
+        <TextView
+            android:id="@+id/meteo_text_weather"
+            style="?android:attr/textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
+

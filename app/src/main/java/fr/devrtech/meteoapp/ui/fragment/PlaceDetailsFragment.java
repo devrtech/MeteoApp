@@ -14,14 +14,23 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import fr.devrtech.meteoapp.MeteoApplication;
 import fr.devrtech.meteoapp.R;
+import fr.devrtech.meteoapp.api.MeteoAppWebService;
+import fr.devrtech.meteoapp.api.model.Weather;
+import fr.devrtech.meteoapp.api.model.WeatherResponse;
 import fr.devrtech.meteoapp.model.Place;
 import fr.devrtech.meteoapp.ui.activity.HomeActivity;
 import fr.devrtech.meteoapp.ui.activity.PlaceDetailActivity;
@@ -39,7 +48,7 @@ import retrofit.Retrofit;
 public class PlaceDetailsFragment extends Fragment {
 
     // Class name for tag
-    static final public String TAG = PlaceEditActivity.class.getSimpleName();
+    static final public String TAG = PlaceDetailsFragment.class.getSimpleName();
 
     /**
      * The fragment argument representing the place ID that this fragment represents.
@@ -50,6 +59,20 @@ public class PlaceDetailsFragment extends Fragment {
      * The {@link Place} content this fragment is presenting.
      */
     private Place place;
+
+    /* *** WIDGETS *** */
+
+    @Bind(R.id.meteo_progressbar)
+    protected ProgressBar progressBar;
+
+    @Bind(R.id.meteo_image_weather)
+    protected ImageView weatherImageView;
+
+    @Bind(R.id.meteo_text_weather)
+    protected TextView weatherText;
+
+    @Bind(R.id.meteo_text_temp)
+    protected TextView tempertureText;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -85,18 +108,27 @@ public class PlaceDetailsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.item_detail, container, false);
-
-        // Show the dummy content as text in a TextView.
-        if (place != null) {
-            ((TextView) rootView.findViewById(R.id.item_detail)).setText(place.getDescription());
-        }
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Root view
+        View rootView = inflater.inflate(R.layout.fragment_details, container, false);
+        // Binding butterknife
+        ButterKnife.bind(this, rootView);
+        // Return
         return rootView;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Check data
+        if (place != null) {
+            // Show progress bar
+            progressBar.setVisibility(View.VISIBLE);
+            // Send WS request
+            MeteoApplication.getWeatherWebService().currentWeather(place.getLatitude(), place.getLongitude(),
+                    new WeatherCallback(getActivity()));
+        }
+    }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -153,7 +185,7 @@ public class PlaceDetailsFragment extends Fragment {
     /**
      * Callback for Weather
      */
-    private class WeatherCallback<WeatherResponse> implements Callback<WeatherResponse> {
+    private class WeatherCallback implements Callback<WeatherResponse> {
 
         // App context
         protected Context context;
@@ -167,17 +199,34 @@ public class PlaceDetailsFragment extends Fragment {
 
         @Override
         public void onResponse(Response<WeatherResponse> response, Retrofit retrofit) {
-
-
+            // Hide progress bar
+            progressBar.setVisibility(View.GONE);
+            // Check data
+            if (response != null && response.body() != null && response.body().getWeathers() != null
+                    && response.body().getWeathers().size() > 0 && response.body().getMain() != null) {
+                // Weather
+                Weather weather = response.body().getWeathers().get(0);
+                // Set weather description
+                weatherText.setText(weather.getDescription());
+                // Set temperature
+                tempertureText.setText(getResources().getString(R.string.temperature,
+                        (int) response.body().getMain().getCelciusTemperature()));
+                // Get URL
+                String url = MeteoAppWebService.getIconURL(weather.getIcon());
+                // Image loading
+                Picasso.with(getActivity()).load(url).into(weatherImageView);
+            }
         }
 
         @Override
         public void onFailure(Throwable t) {
-            // Toast for errors
-            Toast.makeText(context, R.string.error_api, Toast.LENGTH_LONG).show();
             // Print
             Log.d(TAG, "WeatherCallback onFailure");
             t.printStackTrace();
+            // Hide progress bar
+            progressBar.setVisibility(View.GONE);
+            // Toast for errors
+            Toast.makeText(context, R.string.error_api, Toast.LENGTH_LONG).show();
         }
 
     }

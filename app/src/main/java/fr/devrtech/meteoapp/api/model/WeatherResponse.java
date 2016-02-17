@@ -5,6 +5,8 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 /**
+ * Response for Weather request
+ * <p/>
  * Created by remi on 09/02/16.
  */
 public class WeatherResponse {

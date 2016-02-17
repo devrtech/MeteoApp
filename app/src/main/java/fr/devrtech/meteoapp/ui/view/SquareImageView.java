@@ -5,6 +5,8 @@ import android.util.AttributeSet;
 import android.widget.ImageView;
 
 /**
+ * {@link ImageView} extended for forcing square size
+ * <p/>
  * Created by remi on 02/02/16.
  */
 public class SquareImageView extends ImageView {

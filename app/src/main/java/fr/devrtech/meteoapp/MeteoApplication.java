@@ -2,6 +2,7 @@ package fr.devrtech.meteoapp;
 
 import android.app.Application;
 
+import fr.devrtech.meteoapp.api.MeteoAppWebService;
 import fr.devrtech.meteoapp.db.MeteoDBHelper;
 import fr.devrtech.meteoapp.model.Place;
 
@@ -18,12 +19,17 @@ public class MeteoApplication extends Application {
     // Database instance
     private MeteoDBHelper dbhelper;
 
+    // Web Service Object
+    private MeteoAppWebService webServiceManager;
+
     @Override
     public void onCreate() {
         super.onCreate();
         APP_INSTANCE = this;
         // Instantiate DB helper
         dbhelper = new MeteoDBHelper(this);
+        // Instantiate Web Service Manager
+        webServiceManager = new MeteoAppWebService();
     }
 
     /**
@@ -35,6 +41,10 @@ public class MeteoApplication extends Application {
 
     static final public MeteoDBHelper getDBhelper() {
         return APP_INSTANCE.dbhelper;
+    }
+
+    static public MeteoAppWebService getWeatherWebService() {
+        return APP_INSTANCE.webServiceManager;
     }
 
 }
