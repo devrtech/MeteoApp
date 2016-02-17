@@ -18,8 +18,7 @@ If you look at my code :
 * Libraries I usually use (I integrate only the minimum library I need).
 * The quality of my code (I code **everyday** like this not only for this demo)
 
-GitHub repository :  
-[GitHub Meteo App](https://github.com/devrtech/MeteoApp.git)  
+GitHub repository : [GitHub Meteo App](https://github.com/devrtech/MeteoApp.git)    
 https://github.com/devrtech/MeteoApp.git
 
 My Website :  
@@ -31,4 +30,5 @@ remi.carteron@devrtech.fr
 My profiles :  
 [Linked-In](https://www.linkedin.com/in/remicarteron) or [Hopwork](https://www.hopwork.fr/profile/remicarteron)
 
-
+Don't hesitate to contact me for any questions or simply leave a comment.  
+Thanks !
