@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Météo</string>
+    <string name="title_item_detail">Item Detail</string>
+
+    <!-- Action -->
+    <string name="action_cancel">Annuler</string>
+    <string name="action_delete">Effacer</string>
+    <string name="action_delete_all">Effacer tout</string>
+    <string name="action_edit">Editer</string>
+    <string name="action_goto">Carte</string>
+    <string name="action_init">Réinitialiser</string>
+    <string name="action_new_place">Nouveau lieu</string>
+    <string name="action_save">Sauvegarder</string>
+
+    <!-- Errors -->
+    <string name="error">Error</string>
+    <string name="error_api">Problème avec le serveur.\nVeuillez réessayer ultérieurement.</string>
+
+    <!-- Edit -->
+    <string name="place_name">Nom</string>
+    <string name="place_longitude">Longitude</string>
+    <string name="place_lattitude">Lattitude</string>
+
+</resources>

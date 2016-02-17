@@ -1,0 +1,8 @@
+/local.properties
+/.gradle
+/build
+/gradlew.bat
+/gradlew
+/.idea
+/MeteoApp.iml
+# Created by .ignore support plugin (hsz.mobi)

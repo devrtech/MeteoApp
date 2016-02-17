@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Delete -->
+    <item
+        android:id="@+id/action_init"
+        android:title="@string/action_init" />c
+
+    <!-- New -->
+    <item
+        android:id="@+id/action_new_place"
+        android:title="@string/action_new_place" />
+
+</menu>
