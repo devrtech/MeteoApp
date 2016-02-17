@@ -3,10 +3,10 @@
 ####This app is a Demo App.
 
 If you want to execute this App you can download it at :  
-http://static.devrtech.fr/apk/MeteoApp.apk  
-[MeteoApp.apk](http://static.devrtech.fr/apk/MeteoApp.apk)
+http://static.devrtech.fr/apk/MeteoApp.apk or [MeteoApp.apk](http://static.devrtech.fr/apk/MeteoApp.apk)
 
 The apk is also available on GitHub :
+https://github.com/devrtech/MeteoApp/blob/master/MeteoApp.apk
 
 
 This code is under "GNU GENERAL PUBLIC LICENSE"
@@ -19,18 +19,17 @@ If you look at my code :
 * Libraries I usually use (I integrate only the minimum library I need).
 * The quality of my code (I code **everyday** like this not only for this demo)
 
-GitHub repository :
+GitHub repository :  
 https://github.com/devrtech/MeteoApp.git
 [GitHub Meteo App](https://github.com/devrtech/MeteoApp.git)
 
-My Website :
+My Website :  
 [www.remi-carteron.com](http://www.remi-carteron.com)
 
-My email :
+My email :  
 remi.carteron@devrtech.fr
 
-My profiles :
-[Linked-In](https://www.linkedin.com/in/remicarteron)
-[Hopwork](https://www.hopwork.fr/profile/remicarteron)
+My profiles :  
+[Linked-In](https://www.linkedin.com/in/remicarteron) or [Hopwork](https://www.hopwork.fr/profile/remicarteron)
 
 
