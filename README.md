@@ -5,13 +5,12 @@
 If you want to execute this App you can download it at :  
 http://static.devrtech.fr/apk/MeteoApp.apk or [MeteoApp.apk](http://static.devrtech.fr/apk/MeteoApp.apk)
 
-The apk is also available on GitHub :
+The apk is also available on GitHub :  
 https://github.com/devrtech/MeteoApp/blob/master/MeteoApp.apk
 
 
-This code is under "GNU GENERAL PUBLIC LICENSE"
-So you can use and modify my app for personnal use only
-or contribute if you want to modify it for other uses.
+This code is under "GNU GENERAL PUBLIC LICENSE"  
+So you can use and modify my app for personnal use only or contribute if you want to modify it for other uses.
 
 If you look at my code :
 
@@ -20,8 +19,8 @@ If you look at my code :
 * The quality of my code (I code **everyday** like this not only for this demo)
 
 GitHub repository :  
+[GitHub Meteo App](https://github.com/devrtech/MeteoApp.git)  
 https://github.com/devrtech/MeteoApp.git
-[GitHub Meteo App](https://github.com/devrtech/MeteoApp.git)
 
 My Website :  
 [www.remi-carteron.com](http://www.remi-carteron.com)
